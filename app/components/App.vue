@@ -1,10 +1,10 @@
 <template>
   <Page>
     <ActionBar>
-      <Label class="font-bold text-indigo-100 font-mono" text="Kuş Giriş Ekranı" col="1" />
+      <Label  text="Kuş Giriş Ekranı" col="1" />
     </ActionBar>
-    <GridLayout columns="*" rows="*" class="p-b-20 my-30 ">
-      <RadDataForm :source="bird" :metadata="birdMetadata" :groups="groups" class="p-5" row="1"> </RadDataForm>
+    <GridLayout columns="*" rows="*" >
+      <RadDataForm :source="bird" :metadata="birdMetadata" :groups="groups"> </RadDataForm>
     </GridLayout>
   </Page>
 </template>
@@ -37,12 +37,12 @@ export default {
         kusSiraNo: null,
         Dogum_Tarihi: "",
         Cinsiyet: "",
-        Notlar: "",
         Tepe: "duz",
         Turu: "",
         Sag_Kuyruk: null,
         Sol_Kuyruk: null,
         Atlama: false,
+        Notlar: "",
       },
       groups: [
         Object.assign(new PropertyGroup(), {
@@ -58,9 +58,10 @@ export default {
         propertyAnnotations: [
           {
             name: "isim",
+            displayName: "İsim",
             validators: [
-              { name: "MinimumLength", params: { length: 2, errorMessage: "isim 2 karakterden daha kısa olamaz" } },
-              { name: "MaximumLength", params: { length: 24, errorMessage: "isim 24 karakterden daha uzun olamaz" } },
+              { name: "MinimumLength", params: { length: 2, errorMessage: "İsim 2 karakterden daha kısa olamaz" } },
+              { name: "MaximumLength", params: { length: 24, errorMessage: "İsim 24 karakterden daha uzun olamaz" } },
             ],
           },
           {
@@ -97,24 +98,20 @@ export default {
             groupName: "Aynalı Kuyruk",
             displayName: "Sağ Kuyruk",
             editor: "Stepper",
-            validators: [
-              {
-                name: "RangeValidator",
-                params: { minimum: 0, maximum: 11, errorMessage: "Ayna sayısı 11'den büyük olamaz" },
-              },
-            ],
+            editorParams: {
+              'minimum': 0,
+              'maximum': 11,
+            },
           },
           {
             name: "Sol_Kuyruk",
             groupName: "Aynalı Kuyruk",
             displayName: "Sol Kuyruk",
             editor: "Stepper",
-            validators: [
-              {
-                name: "RangeValidator",
-                params: { minimum: 0, maximum: 11, errorMessage: "Ayna sayısı 11'den büyük olamaz" },
-              },
-            ],
+            editorParams: {
+              'minimum': 0,
+              'maximum': 11,
+            },
           },
           {
             name: "Atlama",
@@ -131,7 +128,18 @@ export default {
       console.log("sexes :>> ", sexes);
     },
   },
+
 };
 </script>
 
-<style lang="scss" scoped></style>
+<style lang="scss">
+DataFormEditorLabel{
+  font-size: 18;
+  margin-bottom: 1;
+  color: #990000;
+}
+DataFormEditorCore{
+  font-size: 16;
+  margin-bottom: 15;
+}
+</style>
