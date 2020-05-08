@@ -3,13 +3,7 @@
     <ActionBar>
       <Label class="font-bold text-indigo-100 font-mono" text="Kuş Giriş Ekranı" col="1" />
     </ActionBar>
-    <GridLayout columns="*" rows="35,auto" class="p-b-20 my-30 ">
-      <Label
-        text="Yeni Kuş Giriş"
-        textWrap="true"
-        class="bg-indigo-200 font-serif text-orange-500 text-semibold text-xl text-center"
-        row="0"
-      />
+    <GridLayout columns="*" rows="*" class="p-b-20 my-30 ">
       <RadDataForm :source="bird" :metadata="birdMetadata" :groups="groups" class="p-5" row="1"> </RadDataForm>
     </GridLayout>
   </Page>
@@ -26,7 +20,7 @@ const tepeTypes = [
   { key: "duz", label: "Düz" },
   { key: "tepeli", label: "Tepeli" },
 ];
-const turuTypes = [
+const doveTypes = [
   { key: "kurenk", label: "Kürenk" },
   { key: "miski", label: "Miski" },
   { key: "arap", label: "Arap" },
@@ -40,11 +34,7 @@ export default {
     return {
       bird: {
         isim: "",
-        ulke: "TR",
-        plaka: "",
-        uyeNo: 0 ,
-        kusSiraNo: 0  ,
-        yil: 2020,
+        kusSiraNo: 0,
         Dogum_Tarihi: "",
         Cinsiyet: "",
         Notlar: "",
@@ -53,7 +43,6 @@ export default {
         Sag_Kuyruk: null,
         Sol_Kuyruk: null,
         Atlama: false,
-        Canli: true,
       },
       groups: [
         Object.assign(new PropertyGroup(), {
@@ -75,29 +64,11 @@ export default {
             ],
           },
           {
-            name: "ulke",
-            displayName: "Ülke",
+            name: "kusSiraNo",
+            displayName: "Kuş Sıra no",
+            editor: "Number",
             validators: [
-              { name: "MinimumLength", params: { length: 2, errorMessage: "Ülke kodu 2 karakterden daha kısa olamaz" } },
-              { name: "MaximumLength", params: { length: 3, errorMessage: "Ülke kodu 3 karakterden daha uzun olamaz" } },
-              { name: "RegExValidator", params: { regEx: "[A-Z]{2,3}", errorMessage: "Ülke kodu 2 yada 3 büyük harfli olmalı" } },
-            ],
-          },
-          {
-            name: "bilezik",
-            required: true,
-            editor: "Phone",
-            validators: [
-              { name: "MinimumLength", params: { length: 9, errorMessage: "Bilezik no 13 karakterden daha kısa olamaz" } },
-              { name: "MaximumLength", params: { length: 16, errorMessage: "Bilezik no 16 karakterden daha uzun olamaz" } },
-              {
-                name: "RegExValidator",
-                params: {
-                  regEx: "[0-9]{2}-[0-9]{1,3}-[0-9]{1,3}-[0-9]{2,4}",
-                  errorMessage: "Bilezik: 01-001-01-2020 formatına uymalı",
-                  successMessage: "formata uyuldu teşekkürler"
-                },
-              },
+              { name: "RangeValidator", params: { minimum: 1, maximum: 99, errorMessage: "Kuş sıra no 1 ile 99 arasında olabilir" } },
             ],
           },
           {
@@ -119,7 +90,7 @@ export default {
             name: "Turu",
             displayName: "Türü",
             editor: "Picker",
-            valuesProvider: turuTypes.map((value) => value.label),
+            valuesProvider: doveTypes.map((value) => value.label),
           },
           {
             name: "Sag_Kuyruk",
@@ -157,8 +128,8 @@ export default {
   },
   methods: {
     send() {
-      console.log('sexes :>> ', sexes);
-    }
+      console.log("sexes :>> ", sexes);
+    },
   },
 };
 </script>
