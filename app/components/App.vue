@@ -12,9 +12,9 @@
 <script lang="ts">
 import { PropertyGroup } from "nativescript-ui-dataform";
 const sexes = [
+  { key: "bebek", label: "Bebek" },
   { key: "erkek", label: "Erkek" },
   { key: "disi", label: "Dişi" },
-  { key: "bebek", label: "Bebek" },
 ];
 const tepeTypes = [
   { key: "duz", label: "Düz" },
@@ -34,11 +34,11 @@ export default {
     return {
       bird: {
         isim: "",
-        kusSiraNo: 0,
+        kusSiraNo: null,
         Dogum_Tarihi: "",
         Cinsiyet: "",
         Notlar: "",
-        Tepe: true,
+        Tepe: "duz",
         Turu: "",
         Sag_Kuyruk: null,
         Sol_Kuyruk: null,
