@@ -1,16 +1,16 @@
 <template>
   <Page>
     <ActionBar>
-      <Label  text="Kuş Giriş Ekranı" col="1" />
+      <Label text="Kuş Giriş Ekranı" col="1" />
     </ActionBar>
-    <GridLayout columns="*" rows="*" >
+    <GridLayout columns="*" rows="*">
       <RadDataForm :source="bird" :metadata="birdMetadata" :groups="groups"> </RadDataForm>
     </GridLayout>
   </Page>
 </template>
 
 <script lang="ts">
-import { PropertyGroup } from "nativescript-ui-dataform";
+import { PropertyGroup , GroupTitleStyle} from "nativescript-ui-dataform";
 const sexes = [
   { key: "bebek", label: "Bebek" },
   { key: "erkek", label: "Erkek" },
@@ -49,7 +49,16 @@ export default {
           name: "Aynalı Kuyruk",
           collapsible: true,
           collapsed: true,
-        })
+          titleStyle: Object.assign(new GroupTitleStyle(), {
+            fillColor: "#a8dadc",
+            labelTextColor: "#1d3557",
+            strokeWidth: 2,
+            strokeColor: "#e63946",
+            separatorColor: "#f1faee",
+            labelTextSize: 22,
+            labelFontName: "BaiJamjuree - Medium",
+          }),
+        }),
       ],
       birdMetadata: {
         isReadOnly: false,
@@ -69,7 +78,10 @@ export default {
             displayName: "Kuş Sıra no",
             editor: "Number",
             validators: [
-              { name: "RangeValidator", params: { minimum: 1, maximum: 99, errorMessage: "Kuş sıra no 1 ile 99 arasında olabilir" } },
+              {
+                name: "RangeValidator",
+                params: { minimum: 1, maximum: 99, errorMessage: "Kuş sıra no 1 ile 99 arasında olabilir" },
+              },
             ],
           },
           {
@@ -99,8 +111,8 @@ export default {
             displayName: "Sağ Kuyruk",
             editor: "Stepper",
             editorParams: {
-              'minimum': 0,
-              'maximum': 11,
+              minimum: 0,
+              maximum: 11,
             },
           },
           {
@@ -109,8 +121,8 @@ export default {
             displayName: "Sol Kuyruk",
             editor: "Stepper",
             editorParams: {
-              'minimum': 0,
-              'maximum': 11,
+              minimum: 0,
+              maximum: 11,
             },
           },
           {
@@ -123,22 +135,18 @@ export default {
       },
     };
   },
-  methods: {
-    send() {
-      console.log("sexes :>> ", sexes);
-    },
-  },
 
 };
 </script>
 
 <style lang="scss">
-DataFormEditorLabel{
+DataFormEditorLabel {
   font-size: 18;
+  text-align: center;
   margin-bottom: 1;
   color: #990000;
 }
-DataFormEditorCore{
+DataFormEditorCore {
   font-size: 16;
   margin-bottom: 15;
 }
